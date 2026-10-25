@@ -1,9 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Mini_Game_Tech_App" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- Tema principale dell'app -->
+    <style name="Theme.Mini_Game_Tech_App" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Personalizzazioni dei colori se necessarie -->
+        <item name="colorPrimary">#0a0a0f</item>
     </style>
 
-    <style name="Theme.Mini_Game_Tech_App" parent="Base.Theme.Mini_Game_Tech_App" />
+    <!-- Tema della Splash Screen nativa -->
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Colore di sfondo della schermata di avvio -->
+        <item name="windowSplashScreenBackground">#0a0a0f</item>
+        <!-- Icona centrale -->
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <!-- Tema dell'app principale che si apre subito dopo la splash -->
+        <item name="postSplashScreenTheme">@style/Theme.Mini_Game_Tech_App</item>
+    </style>
 </resources>

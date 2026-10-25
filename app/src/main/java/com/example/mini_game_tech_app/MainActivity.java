@@ -14,6 +14,7 @@ import android.webkit.WebViewClient;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.splashscreen.SplashScreen; // <-- IMPORT NECESSARIO PER LA SPLASH SCREEN
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // 1. INSTALLA LA SPLASH SCREEN NATIVA PRIMA DI TUTTO
+        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
+
         super.onCreate(savedInstanceState);
 
         // Attivo la modalità Fullscreen Immersiva
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        // 1. INIZIALIZZAZIONE DELLA WEBVIEW E DEL SWIPE REFRESH
+        // 2. INIZIALIZZAZIONE DELLA WEBVIEW E DEL SWIPE REFRESH
         webView = findViewById(R.id.webview);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
 
@@ -97,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             loadAppContent();
         }
 
-        // 2. GESTIONE AGGIORNATA DEL TASTO INDIETRO
+        // 3. GESTIONE AGGIORNATA DEL TASTO INDIETRO
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
