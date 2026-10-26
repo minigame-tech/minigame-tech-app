@@ -1,89 +1,159 @@
 # 🕹️ Minigame Tech
 
-> A lightweight, cross-platform retro arcade web platform hosting classic arcade game remakes (Pac-Man, Space Invaders, Frogger, Tetris) built with Python and modern web technologies.
+> A lightweight retro arcade platform featuring classic game remakes, designed for web play and packaged as an Android app through a native WebView wrapper.
 
-[![GitHub Pages](https://img.shields.io/badge/status-live-success.svg)](https://cipriano-salvatore.github.io/minigame-tech/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Platform](https://img.shields.io/badge/platform-Web%20%7C%20Android-blue.svg)]()
-
----
-
-## 📖 About The Project
-
-**Minigame Tech** is an open-source project dedicated to recreating legendary retro arcade games. Designed with a modular and lightweight approach, the platform brings classic arcade mechanics directly to modern browsers and mobile devices.
-
-Whether you're dodging traffic in Frogger, clearing aliens in Space Invaders, or navigating mazes in Pac-Man, Minigame Tech delivers a seamless nostalgic experience optimized for both desktop and touch screens.
+[![Website](https://img.shields.io/badge/website-live-success.svg)](https://minigame-tech.github.io/)
+[![Android App](https://img.shields.io/badge/platform-Android-blue.svg)](#running-the-app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
 
 ---
 
-## 🎮 Features
+## Overview
 
-- **Classic Arcade Remakes:** Faithfully recreated mechanics of timeless retro titles.
-- **Cross-Platform Play:** Fully responsive design optimized for desktop browsers and mobile touchscreens.
-- **Android App Support:** Packaged natively for mobile via Android WebView for seamless Google Play Store distribution.
-- **Zero-Dependency Web Core:** Built using efficient core scripts and modern web standards for lightning-fast load times.
+Minigame Tech is a lightweight, cross-platform retro arcade project inspired by the golden age of arcades. The core experience is delivered as a responsive web platform, and the repository also includes an Android application that wraps the web app in a native shell using Java and WebView.
 
----
+This combination allows the project to be:
 
-## 🚀 Built With
+- easy to distribute on the web,
+- mobile-friendly and touch-optimized,
+- packaged natively for Android,
+- lightweight and fast to load.
 
-- **Core Logic & Game Loops:** Python (`g2d`, Pygame) / C#
-- **Frontend:** HTML5, CSS3, Responsive Design
-- **Hosting & CI/CD:** GitHub Pages
-- **Mobile Wrapper:** Android Studio (Java, WebView API)
+The app loads the hosted web experience from:
 
----
-
-## 🌐 Live Demo & Access
-
-You can play the minigames directly through the web platform:
-
-🔗 **[minigame-tech.github.io](https://minigame-tech.github.io/)**
+<https://minigame-tech.github.io/>
 
 ---
 
-## 📱 Android Application
+## Features
 
-Minigame Tech is also available as an Android application, bringing the full retro arcade experience natively to smartphones with optimized touch layouts and fullscreen immersive mode.
+- Classic arcade-inspired games and remakes
+- Responsive design for desktop and mobile
+- Touch-friendly controls for smartphones and tablets
+- Android native wrapper via WebView
+- Smooth fullscreen experience
+- Offline error state for the Android app
+- Lightweight architecture with minimal dependencies
 
 ---
 
-## 🛠️ Local Development & Setup
+## Project Structure
 
-To run or modify the project locally:
+```text
+minigame-tech-app/
+├── app/
+│   ├── build.gradle.kts
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── AndroidManifest.xml
+│   │   │   ├── java/
+│   │   │   │   └── com/example/mini_game_tech_app/
+│   │   │   │       └── MainActivity.java
+│   │   │   ├── res/
+│   │   │   └── keepRules/
+│   └── release/
+├── build.gradle.kts
+├── settings.gradle.kts
+├── gradlew
+├── gradlew.bat
+├── gradle.properties
+├── README.md
+├── LICENSE.md
+├── CONTRIBUTING.md
+├── CODE_OF_CONDUCT.md
+├── SECURITY.md
+└── Logo.jpeg
+```
 
-1. **Clone the repository:**
+The Android app is defined in `app/` and uses `MainActivity.java` to:
+
+- initialize a `WebView`,
+- load the public website,
+- handle back navigation,
+- detect connectivity,
+- show an offline fallback page,
+- use immersive fullscreen mode.
+
+---
+
+## Tech Stack
+
+- **Android:** Java, Android SDK, WebView
+- **UI:** XML layouts, Material components
+- **Web platform:** HTML, CSS, JavaScript
+- **Hosting:** GitHub Pages
+- **Build system:** Gradle / Kotlin DSL
+
+---
+
+## Running the App
+
+### Prerequisites
+
+- Android Studio
+- JDK 11+
+- Android SDK configured for API 24+ (project target: 37)
+
+### Build steps
+
+1. Clone the repository:
 
    ```bash
-   git clone https://github.com/cipriano-salvatore/minigame-tech.git
+   git clone https://github.com/minigame-tech/minigame-tech-app.git
+   cd minigame-tech-app
    ```
 
-2. **Navigate to the project directory:**
-
-   ```bash
-   cd minigame-tech
-   ```
-
-3. **Open and test:** Open `index.html` in your preferred browser or serve it via a local development server (e.g., Python's HTTP server):
-
-   ```bash
-   python3 -m http.server 8000
-   ```
+2. Open the project in Android Studio.
+3. Let Gradle sync dependencies.
+4. Run the `app` configuration on an emulator or a physical Android device.
 
 ---
 
-## 🤝 Contributing
+## Web Experience
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/cipriano-salvatore/minigame-tech/issues).
+The app is designed to display the hosted game platform at:
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+<https://minigame-tech.github.io/>
+
+This allows the browser-based experience to remain lightweight while still being accessible from a native Android wrapper.
 
 ---
 
-## 📄 License
+## Offline Behavior
 
-Distributed under the MIT License. See [LICENSE](https://github.com/minigame-tech/minigame-tech-app?tab=License-1-ov-file) for more information.
+The Android app includes a custom offline page shown when no network is available. This provides a fallback experience instead of a blank or broken WebView.
+
+---
+
+## Contributing
+
+Contributions are welcome.
+
+If you want to help:
+
+1. Fork the project
+2. Create a new branch
+3. Commit your changes
+4. Open a pull request
+
+Please also read:
+
+- [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)
+
+---
+
+## License
+
+This project is distributed under the MIT License. See [LICENSE.md](LICENSE.md) for details.
+
+---
+
+## Credits
+
+Built for retro arcade enthusiasts and designed to bring classic gameplay back into a modern, mobile-friendly environment.
+
+---
+## Project Status
+
+The repository is structured as an Android wrapper around a web-based arcade experience, with a live web deployment and native mobile access.
