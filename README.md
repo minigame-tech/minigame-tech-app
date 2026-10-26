@@ -138,8 +138,8 @@ If you want to help:
 
 Please also read:
 
-- [`CONTRIBUTING.md`](CONTRIBUTING.md)
-- [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)
+- [`CONTRIBUTING.md`](https://github.com/minigame-tech/minigame-tech-app?tab=contributing-ov-file)
+- [`CODE_OF_CONDUCT.md`](https://github.com/minigame-tech/minigame-tech-app?tab=coc-ov-file)
 
 ---
 
