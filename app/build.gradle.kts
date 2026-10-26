@@ -4,9 +4,7 @@ plugins {
 
 android {
     namespace = "com.example.mini_game_tech_app"
-    compileSdk {
-        version = release(37)
-    }
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.example.mini_game_tech_app"
@@ -27,16 +25,13 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
 dependencies {
-    implementation(libs.activity.ktx)
     implementation(libs.appcompat)
-    implementation(libs.constraintlayout)
-    implementation(libs.material)
     implementation(libs.swiperefreshlayout)
     implementation("androidx.core:core-splashscreen:1.0.1")
     testImplementation(libs.junit)

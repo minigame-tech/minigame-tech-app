@@ -1,9 +1,11 @@
 package com.example.mini_game_tech_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebResourceError;
@@ -14,7 +16,7 @@ import android.webkit.WebViewClient;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.splashscreen.SplashScreen; // <-- IMPORT NECESSARIO PER LA SPLASH SCREEN
+import androidx.core.splashscreen.SplashScreen;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // 1. INSTALLA LA SPLASH SCREEN NATIVA PRIMA DI TUTTO
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
 
         super.onCreate(savedInstanceState);
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
         webSettings.setDatabaseEnabled(true);
-        webSettings.setAllowFileAccess(true);
+        webSettings.setAllowFileAccess(false); // Solo contenuti remoti, nessun accesso file locale
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
@@ -53,10 +54,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 if (isNetworkAvailable(MainActivity.this)) {
+                    // Ricarica la pagina corrente se disponibile, altrimenti carica l'URL principale
                     String currentUrl = webView.getUrl();
-                    if (currentUrl == null || currentUrl.startsWith("data:") || currentUrl.contains("error")) {
+                    if (currentUrl == null || currentUrl.startsWith("data:")) {
                         webView.loadUrl(APP_URL);
                     } else {
+                        // Rimossa la check "contains(error)" troppo generica
                         webView.reload();
                     }
                 } else {
@@ -68,9 +71,24 @@ public class MainActivity extends AppCompatActivity {
 
         // Gestione avanzata del client WebView
         webView.setWebViewClient(new WebViewClient(){
+            // Dominio principale dell'applicazione (per aprire link esterni nel browser di sistema)
+            private static final String APP_DOMAIN = "minigame-tech.github.io";
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request){
-                view.loadUrl(request.getUrl().toString());
+                String url = request.getUrl().toString();
+
+                // Se il URL appartiene al dominio principale, caricalo nella WebView
+                if (url.startsWith("https://" + APP_DOMAIN) || url.startsWith("http://" + APP_DOMAIN)) {
+                    view.loadUrl(url);
+                    return true;
+                }
+
+                // Per tutti gli altri URL, apri nel browser di sistema (comportamento standard)
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
                 return true;
             }
 
@@ -184,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                 "<body>" +
                 "<div class=\"error-card\">" +
                 "  <div class=\"emoji-icon\">⚠️</div>" +
-                "  <h2>CONNESSIONE ASSENTE</h2>" +
+                "  <h2>NESSUNA CONNESSIONE</h2>" +
                 "  <p>Sembra che tu sia offline. Attiva il Wi-Fi o i dati mobili per accedere alla piattaforma di mini-giochi.</p>" +
                 "  <div class=\"hint\">⬇️ Trascina verso il basso per ricaricare</div>" +
                 "</div>" +
@@ -222,6 +240,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        hideSystemUI();
     }
 }
