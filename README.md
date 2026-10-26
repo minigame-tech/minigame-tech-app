@@ -125,5 +125,3 @@ Distribuito sotto la licenza MIT. Vedi [LICENSE](https://github.com/cipriano-sal
 - **Android App:** Modulo `app/` su Android Studio, minimum SDK 24, target SDK 37.
 - **Build System:** Gradle con Java 17 (compatibile con compileSdk 37).
 - **Risorse aggiunte:** `res/xml/network_security_config.xml` per la sicurezza di rete configurata.
-
-Se intendi aggiungere funzionalità native (notifiche, salvataggio progress, ecc.), si consiglia di iniziare estendendo le capacità del WebView tramite JavaScript interfaces o migrating selettive funzionalità in Kotlin/Native.

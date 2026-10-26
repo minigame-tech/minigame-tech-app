@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
         // Configurazione avanzata delle impostazioni della WebView
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webSettings.setDomStorageEnabled(true);
+        webSettings.setDomStorageEnabled(true); // Necessario per il tema e le preferenze
         webSettings.setDatabaseEnabled(true);
-        webSettings.setAllowFileAccess(false); // Solo contenuti remoti, nessun accesso file locale
+        webSettings.setAllowFileAccess(false); // Solo contenuti remoti
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
@@ -54,12 +54,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 if (isNetworkAvailable(MainActivity.this)) {
-                    // Ricarica la pagina corrente se disponibile, altrimenti carica l'URL principale
                     String currentUrl = webView.getUrl();
                     if (currentUrl == null || currentUrl.startsWith("data:")) {
                         webView.loadUrl(APP_URL);
                     } else {
-                        // Rimossa la check "contains(error)" troppo generica
                         webView.reload();
                     }
                 } else {
@@ -133,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void loadAppContent() {
+   private void loadAppContent() {
         if (isNetworkAvailable(this)) {
             webView.loadUrl(APP_URL);
         } else {
